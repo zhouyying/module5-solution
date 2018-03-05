@@ -65,9 +65,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 // TODO: STEP 0: Look over the code from
 // *** start ***
-$ajaxUtils.sendGetRequest(
-    allCategoriesUrl,
-    buildAndShowHomeHTML);
+
 // *** finish ***
 // below.
 // We changed this code to retrieve all categories from the server instead of
@@ -85,7 +83,11 @@ $ajaxUtils.sendGetRequest(
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
-  buildAndShowHomeHTML(), // ***** <---- TODO: STEP 1: Substitute [...] ******
+  function (allCategoriesUrl) {
+    document.querySelector("#main-content")
+    .innerHTML = buildAndShowHomeHTML(allCategoriesUrl);
+  },
+ // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitely setting the flag to get JSON from server processed into an object literal
 });
 // *** finish **
